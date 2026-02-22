@@ -47,12 +47,18 @@ export default function deepLink(server: FastMCP): void {
           const platform = getPlatformName(driver);
           if (platform === PLATFORM.android) {
             const params: Record<string, unknown> = { url };
-            if (appId != null) params.package = appId;
-            if (waitForLaunch != null) params.waitForLaunch = waitForLaunch;
+            if (appId != null) {
+              params.package = appId;
+            }
+            if (waitForLaunch != null) {
+              params.waitForLaunch = waitForLaunch;
+            }
             await execute(driver, 'mobile: deepLink', params);
           } else if (platform === PLATFORM.ios) {
             const params: Record<string, unknown> = { url };
-            if (appId != null) params.bundleId = appId;
+            if (appId != null) {
+              params.bundleId = appId;
+            }
             await execute(driver, 'mobile: deepLink', params);
           } else {
             throw new Error(
