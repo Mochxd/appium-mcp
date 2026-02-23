@@ -1,3 +1,9 @@
+## [1.19.0](https://github.com/appium/appium-mcp/compare/v1.18.1...v1.19.0) (2026-02-23)
+
+### Features
+
+* **app-management:** add deep link tool ([#173](https://github.com/appium/appium-mcp/issues/173)) ([5a8652f](https://github.com/appium/appium-mcp/commit/5a8652f70f162129d938d988b800868b5c9ede55))
+
 ## [1.18.1](https://github.com/appium/appium-mcp/compare/v1.18.0...v1.18.1) (2026-02-22)
 
 ### Miscellaneous Chores
