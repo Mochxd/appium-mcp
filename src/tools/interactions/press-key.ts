@@ -67,13 +67,10 @@ export default function pressKey(server: FastMCP): void {
           'Android only. Whether to perform a long press. Defaults to false.'
         ),
     })
-    .refine(
-      (value) => value.key !== undefined || value.keyCode !== undefined,
-      {
-        message: 'Either key or keyCode must be provided',
-        path: ['key'],
-      }
-    );
+    .refine((value) => value.key !== undefined || value.keyCode !== undefined, {
+      message: 'Either key or keyCode must be provided',
+      path: ['key'],
+    });
 
   server.addTool({
     name: 'appium_press_key',
@@ -99,9 +96,7 @@ export default function pressKey(server: FastMCP): void {
       try {
         if (platform === PLATFORM.android) {
           const resolvedKeyCode =
-            keyCode ??
-            (key && ANDROID_KEYCODE_MAP[key]) ??
-            undefined;
+            keyCode ?? (key && ANDROID_KEYCODE_MAP[key]) ?? undefined;
 
           if (resolvedKeyCode == null) {
             throw new Error(
@@ -181,4 +176,3 @@ export default function pressKey(server: FastMCP): void {
     },
   });
 }
-
