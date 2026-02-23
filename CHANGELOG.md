@@ -1,3 +1,15 @@
+## [1.18.1](https://github.com/appium/appium-mcp/compare/v1.18.0...v1.18.1) (2026-02-22)
+
+### Miscellaneous Chores
+
+* modify types ([#175](https://github.com/appium/appium-mcp/issues/175)) ([da7a336](https://github.com/appium/appium-mcp/commit/da7a33636ad179495100a34f7b635705069ca42c))
+
+## [1.18.0](https://github.com/appium/appium-mcp/compare/v1.17.0...v1.18.0) (2026-02-22)
+
+### Features
+
+* use latest uia2/xcuitest for embedded drivers and simplify a bit ([#174](https://github.com/appium/appium-mcp/issues/174)) ([d85a5df](https://github.com/appium/appium-mcp/commit/d85a5df35bb0cf363514478faa7f90c7f6438d55))
+
 ## [1.17.0](https://github.com/appium/appium-mcp/compare/v1.16.1...v1.17.0) (2026-02-21)
 
 ### Features
