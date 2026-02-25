@@ -1,3 +1,11 @@
+## [1.20.0](https://github.com/appium/appium-mcp/compare/v1.19.1...v1.20.0) (2026-02-25)
+
+### Features
+
+* add get active element ([#176](https://github.com/appium/appium-mcp/issues/176)) ([248b71c](https://github.com/appium/appium-mcp/commit/248b71c8205f146e834891a2cb065088d14ac018))
+* **interactions:** add press-key tool ([#178](https://github.com/appium/appium-mcp/issues/178)) ([67db0da](https://github.com/appium/appium-mcp/commit/67db0da7a5f789047ad007e6c735d87b6213ff3d))
+* **screenshot:** add optional maxWidth parameter for image resizing ([#180](https://github.com/appium/appium-mcp/issues/180)) ([03b1c99](https://github.com/appium/appium-mcp/commit/03b1c99934631050697f6a69031c0544f83f6acd)), closes [#56](https://github.com/appium/appium-mcp/issues/56)
+
 ## [1.19.1](https://github.com/appium/appium-mcp/compare/v1.19.0...v1.19.1) (2026-02-23)
 
 ### Miscellaneous Chores
