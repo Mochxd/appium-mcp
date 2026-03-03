@@ -11,14 +11,14 @@ export function lockDevice(server: FastMCP): void {
       .min(1)
       .optional()
       .describe(
-        'How long to lock the screen in seconds. iOS only; ignored on Android. If omitted, device locks until unlock is called.'
+        'How long to lock the screen in seconds before it is automatically unlocked. Supported on both Android (UiAutomator2) and iOS (XCUITest). If omitted, the device stays locked until appium_mobile_unlock is called.'
       ),
   });
 
   server.addTool({
-    name: 'appium_lock',
+    name: 'appium_mobile_lock',
     description:
-      'Lock the device. On iOS, optionally lock for a given number of seconds. On Android, the device locks until appium_unlock is called. Supported on Android (UiAutomator2) and iOS (XCUITest).',
+      'Lock the device. Optionally lock for a given number of seconds (both Android and iOS support automatic unlock after the timeout). If no timeout is provided, the device stays locked until appium_mobile_unlock is called. Supported on Android (UiAutomator2) and iOS (XCUITest).',
     parameters: lockSchema,
     annotations: {
       readOnlyHint: false,
@@ -65,7 +65,7 @@ export function unlockDevice(server: FastMCP): void {
   const unlockSchema = z.object({});
 
   server.addTool({
-    name: 'appium_unlock',
+    name: 'appium_mobile_unlock',
     description:
       'Unlock the device if it is locked. No-op if already unlocked. Supported on Android (UiAutomator2) and iOS (XCUITest).',
     parameters: unlockSchema,
