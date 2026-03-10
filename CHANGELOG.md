@@ -1,3 +1,9 @@
+## [1.24.2](https://github.com/appium/appium-mcp/compare/v1.24.1...v1.24.2) (2026-03-10)
+
+### Bug Fixes
+
+* extract session ID from array returned by createSession ([#199](https://github.com/appium/appium-mcp/issues/199)) ([2c1d215](https://github.com/appium/appium-mcp/commit/2c1d215ac00cbe8d823b5f885a30f7bc69ce3b35))
+
 ## [1.24.1](https://github.com/appium/appium-mcp/compare/v1.24.0...v1.24.1) (2026-03-10)
 
 ### Bug Fixes
