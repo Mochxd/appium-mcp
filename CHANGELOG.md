@@ -1,3 +1,9 @@
+## [1.25.0](https://github.com/appium/appium-mcp/compare/v1.24.2...v1.25.0) (2026-03-11)
+
+### Features
+
+* add `appium_pinch` gesture tool for iOS and Android ([#203](https://github.com/appium/appium-mcp/issues/203)) ([ee0896e](https://github.com/appium/appium-mcp/commit/ee0896eb0d9a5dac6002c59683bee1aeee9d2b82))
+
 ## [1.24.2](https://github.com/appium/appium-mcp/compare/v1.24.1...v1.24.2) (2026-03-10)
 
 ### Bug Fixes
