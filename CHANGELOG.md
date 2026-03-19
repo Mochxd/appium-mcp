@@ -1,3 +1,9 @@
+## [1.28.0](https://github.com/appium/appium-mcp/compare/v1.27.1...v1.28.0) (2026-03-19)
+
+### Features
+
+* add `appium_mobile_get_device_info` tool ([#215](https://github.com/appium/appium-mcp/issues/215)) ([1f42d0b](https://github.com/appium/appium-mcp/commit/1f42d0bf18bb53e4a4d4dad85376258a5026f693))
+
 ## [1.27.1](https://github.com/appium/appium-mcp/compare/v1.27.0...v1.27.1) (2026-03-17)
 
 ### Miscellaneous Chores
