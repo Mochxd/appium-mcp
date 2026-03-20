@@ -1,3 +1,9 @@
+## [1.30.0](https://github.com/appium/appium-mcp/compare/v1.29.0...v1.30.0) (2026-03-20)
+
+### Features
+
+* **ai-finder:** add natural language element finding using vision models ([#200](https://github.com/appium/appium-mcp/issues/200)) ([2b43267](https://github.com/appium/appium-mcp/commit/2b43267b63c936c2e982d36b8e8fed658bd9a51c))
+
 ## [1.29.0](https://github.com/appium/appium-mcp/compare/v1.28.0...v1.29.0) (2026-03-20)
 
 ### Features
