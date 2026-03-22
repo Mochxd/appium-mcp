@@ -1,3 +1,9 @@
+## [1.34.0](https://github.com/appium/appium-mcp/compare/v1.33.0...v1.34.0) (2026-03-22)
+
+### Features
+
+* **app:** add appium_background_app via mobile: backgroundApp ([#223](https://github.com/appium/appium-mcp/issues/223)) ([f26cbe6](https://github.com/appium/appium-mcp/commit/f26cbe6ebcd47a22da34863fb9728f5b724d80d4))
+
 ## [1.33.0](https://github.com/appium/appium-mcp/compare/v1.32.0...v1.33.0) (2026-03-22)
 
 ### Features
