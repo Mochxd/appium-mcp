@@ -349,6 +349,7 @@ The default regex pattern allows any URL that starts with `http://` or `https://
 | Tool                  | Description                                                        |
 | --------------------- | ------------------------------------------------------------------ |
 | `appium_activate_app` | Activate (launch/bring to foreground) a specified app by bundle ID |
+| `appium_background_app` | Background the current app for a duration (optional; defaults to 5 seconds) |
 | `appium_installApp`   | Install an app on the device from a file path                      |
 | `appium_uninstallApp` | Uninstall an app from the device by bundle ID                      |
 | `appium_terminateApp` | Terminate (close) a specified app                                  |

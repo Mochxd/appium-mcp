@@ -55,6 +55,7 @@ import clipboard from './interactions/clipboard.js';
 import handleAlert from './interactions/handle-alert.js';
 import { screenshot, elementScreenshot } from './interactions/screenshot.js';
 import activateApp from './app-management/activate-app.js';
+import backgroundApp from './app-management/background-app.js';
 import installApp from './app-management/install-app.js';
 import uninstallApp from './app-management/uninstall-app.js';
 import terminateApp from './app-management/terminate-app.js';
@@ -183,6 +184,7 @@ export default function registerTools(server: FastMCP): void {
 
   // App Management
   activateApp(server);
+  backgroundApp(server);
   installApp(server);
   uninstallApp(server);
   terminateApp(server);
