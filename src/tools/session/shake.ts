@@ -20,7 +20,8 @@ function getMergedCapabilities(driver: unknown): Record<string, unknown> {
  */
 function isIOSSimulatorFromCapabilities(driver: unknown): boolean {
   const caps = getMergedCapabilities(driver);
-  return caps['appium:isSimulator'] === true || caps['isSimulator'] === true;
+  const isSimulator = (caps as { isSimulator?: boolean }).isSimulator;
+  return caps['appium:isSimulator'] === true || isSimulator === true;
 }
 
 export default function shakeDevice(server: FastMCP): void {
