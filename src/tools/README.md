@@ -62,7 +62,7 @@ When searching for elements, follow this priority order for efficiency:
 ### App Management (`app-management/`)
 
 - `activate-app.ts` - Activate apps
-- `background-app.ts` - Background the current app (`appium_background_app`)
+- `background-app.ts` - Background the current app (`appium_mobile_background_app`)
 - `deep-link.ts` - Open a deep link URL with the default or specified app
 - `terminate-app.ts` - Terminate apps
 - `install-app.ts` - Install apps
