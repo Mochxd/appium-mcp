@@ -14,18 +14,13 @@ function getMergedCapabilities(driver: unknown): Record<string, unknown> {
 }
 
 /**
- * XCUITest `mobile: shake` is implemented for iOS Simulator (not Android; not
- * supported for physical iOS devices in practice). Uses session capabilities
- * when the server reports `isSimulator` or a device name containing "Simulator".
+ * XCUITest `mobile: shake` is for iOS Simulator only. We require the session
+ * capabilities to already report a simulator (Appium sets `appium:isSimulator`
+ * or `isSimulator` to true on Simulator sessions).
  */
-function isLikelyIOSSimulator(driver: unknown): boolean {
+function isIOSSimulatorFromCapabilities(driver: unknown): boolean {
   const caps = getMergedCapabilities(driver);
-  if (caps['appium:isSimulator'] === true) return true;
-  if (caps['isSimulator'] === true) return true;
-  const deviceName = String(
-    caps['appium:deviceName'] ?? caps['deviceName'] ?? ''
-  );
-  return /simulator/i.test(deviceName);
+  return caps['appium:isSimulator'] === true || caps['isSimulator'] === true;
 }
 
 export default function shakeDevice(server: FastMCP): void {
@@ -34,8 +29,9 @@ export default function shakeDevice(server: FastMCP): void {
   server.addTool({
     name: 'appium_mobile_shake',
     description:
-      'Perform a shake gesture on the iOS Simulator via Appium `mobile: shake` (XCUITest). ' +
-      'Not supported on Android. Physical iOS devices are not supported—use an iOS Simulator session only.',
+      'Perform a shake gesture on the iOS Simulator via Appium `mobile: shake` ' +
+      '(XCUITest). Not supported on Android. Physical iOS devices are not ' +
+      'supported—use an iOS Simulator session only.',
     parameters: shakeSchema,
     annotations: {
       readOnlyHint: false,
@@ -56,18 +52,26 @@ export default function shakeDevice(server: FastMCP): void {
           content: [
             {
               type: 'text',
-              text: 'Shake is not available on Android. This tool only supports iOS Simulator (XCUITest `mobile: shake`).',
+              text:
+                'Shake is not available on Android. This tool only supports ' +
+                'iOS Simulator (XCUITest `mobile: shake`).',
             },
           ],
         };
       }
 
-      if (platform === PLATFORM.ios && !isLikelyIOSSimulator(driver)) {
+      if (
+        platform === PLATFORM.ios &&
+        !isIOSSimulatorFromCapabilities(driver)
+      ) {
         return {
           content: [
             {
               type: 'text',
-              text: 'Shake is only supported on the iOS Simulator. Physical iOS devices are not supported for this command—create a session against a Simulator.',
+              text:
+                'Shake is only supported when the session capabilities report ' +
+                'a Simulator (`appium:isSimulator` or `isSimulator` is true). ' +
+                'Use an iOS Simulator session.',
             },
           ],
         };
