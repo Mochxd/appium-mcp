@@ -1,3 +1,9 @@
+## [1.34.1](https://github.com/appium/appium-mcp/compare/v1.34.0...v1.34.1) (2026-03-23)
+
+### Miscellaneous Chores
+
+* exclude src/tests ([#226](https://github.com/appium/appium-mcp/issues/226)) ([0c2a72d](https://github.com/appium/appium-mcp/commit/0c2a72db5bde392891482b9c3849bf9b71b51a87))
+
 ## [1.34.0](https://github.com/appium/appium-mcp/compare/v1.33.0...v1.34.0) (2026-03-22)
 
 ### Features
