@@ -1,3 +1,9 @@
+## [1.36.0](https://github.com/appium/appium-mcp/compare/v1.35.0...v1.36.0) (2026-03-26)
+
+### Features
+
+* **interactions:** implement screen recording ([#228](https://github.com/appium/appium-mcp/issues/228)) ([a04c1d2](https://github.com/appium/appium-mcp/commit/a04c1d235326a4e934b2920434ee82818109b364))
+
 ## [1.35.0](https://github.com/appium/appium-mcp/compare/v1.34.4...v1.35.0) (2026-03-24)
 
 ### Features
