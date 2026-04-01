@@ -1,3 +1,9 @@
+## [1.39.0](https://github.com/appium/appium-mcp/compare/v1.38.2...v1.39.0) (2026-04-01)
+
+### Features
+
+* **interactions:** implement get window size ([#236](https://github.com/appium/appium-mcp/issues/236)) ([9dab67b](https://github.com/appium/appium-mcp/commit/9dab67b8243f7df6fac936af9d49af1c9e3a82a7))
+
 ## [1.38.2](https://github.com/appium/appium-mcp/compare/v1.38.1...v1.38.2) (2026-03-31)
 
 ### Bug Fixes
