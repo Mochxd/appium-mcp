@@ -1,3 +1,9 @@
+## [1.45.0](https://github.com/appium/appium-mcp/compare/v1.44.1...v1.45.0) (2026-04-06)
+
+### Features
+
+* **app-management:** add appium_mobile_clear_app tool ([#243](https://github.com/appium/appium-mcp/issues/243)) ([5af9e2f](https://github.com/appium/appium-mcp/commit/5af9e2f2e6570ac4510de73368d484d466be75fd))
+
 ## [1.44.1](https://github.com/appium/appium-mcp/compare/v1.44.0...v1.44.1) (2026-04-04)
 
 ### Miscellaneous Chores
