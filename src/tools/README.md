@@ -71,6 +71,10 @@ When searching for elements, follow this priority order for efficiency:
 - `permissions.ts` - Unified mobile permissions (`appium_mobile_permissions`; action get / update / reset, platform-specific fields)
 - `list-apps.ts` - List installed apps
 
+### Context Management (`context/`)
+
+- `context.ts` - Unified context operations (`appium_context`; `action=list|switch`)
+
 ### Test Generation (`test-generation/`)
 
 - `locators.ts` - Generate page locators
