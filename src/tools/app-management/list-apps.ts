@@ -22,11 +22,8 @@ const execAsync = promisify(exec);
 
 /** Extract package ids from the `mobile: listApps` result (map or legacy array). */
 function androidListAppsPackageIds(
-  result: Record<string, unknown> | string[] | null | undefined
+  result: Record<string, unknown> | string[]
 ): string[] {
-  if (result == null) {
-    return [];
-  }
   if (Array.isArray(result)) {
     return result;
   }
