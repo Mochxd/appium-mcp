@@ -41,11 +41,7 @@ export default function doubleTap(server: FastMCP): void {
         const platform = getPlatformName(driver);
         if (platform === PLATFORM.android) {
           // Get element location for Android double tap
-          const element = await driver.findElement('id', args.elementUUID);
-          const elementRect = await getElementRect(
-            driver,
-            element['element-6066-11e4-a52e-4f735466cecf']
-          );
+          const elementRect = await getElementRect(driver, args.elementUUID);
 
           // Calculate center coordinates
           const x = elementRect.x + elementRect.width / 2;
