@@ -13,7 +13,7 @@ import {
   toolErrorMessage,
 } from '../tool-response.js';
 
-export default function generateTest(server: FastMCP): void {
+export default function clickElement(server: FastMCP): void {
   const clickActionSchema = z.object({
     elementUUID: elementUUIDScheme,
     sessionId: z
