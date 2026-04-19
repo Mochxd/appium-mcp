@@ -1,3 +1,9 @@
+## [1.60.1](https://github.com/appium/appium-mcp/compare/v1.60.0...v1.60.1) (2026-04-19)
+
+### Bug Fixes
+
+* **click:** rename default export to clickElement ([#276](https://github.com/appium/appium-mcp/issues/276)) ([65d5f52](https://github.com/appium/appium-mcp/commit/65d5f52700e84239efd38d75fd1f468c58b57569))
+
 ## [1.60.0](https://github.com/appium/appium-mcp/compare/v1.59.1...v1.60.0) (2026-04-19)
 
 ### Features
