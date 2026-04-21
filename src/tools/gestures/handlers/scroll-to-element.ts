@@ -1,15 +1,32 @@
 import type { ContentResult } from 'fastmcp';
 import type { DriverInstance } from '../../../session-store.js';
-import { getPlatformName, PLATFORM } from '../../../session-store.js';
-import { execute, getWindowRect, performActions } from '../../../command.js';
+import { getPageSource } from '../../../command.js';
 import {
   errorResult,
   textResult,
   toolErrorMessage,
 } from '../../tool-response.js';
 import type { GestureArgs } from '../schema.js';
+import { performVerticalScroll } from './swipe-scroll.js';
 
-const MAX_SCROLL_ATTEMPTS = 10;
+const PRESET_TO_DISTANCE: Record<
+  NonNullable<GestureArgs['scrollDistancePreset']>,
+  number
+> = {
+  small: 0.25,
+  medium: 0.45,
+  large: 1,
+};
+
+function resolveScrollDistance(args: GestureArgs): number {
+  if (args.scrollDistancePreset) {
+    return PRESET_TO_DISTANCE[args.scrollDistancePreset];
+  }
+  if (args.scrollDistance !== undefined) {
+    return args.scrollDistance;
+  }
+  return 0.45;
+}
 
 async function tryFindElement(
   driver: DriverInstance,
@@ -22,45 +39,6 @@ async function tryFindElement(
   } catch {
     return false;
   }
-}
-
-async function performW3CScroll(
-  driver: DriverInstance,
-  direction: 'up' | 'down'
-): Promise<void> {
-  const { width, height } = await getWindowRect(driver);
-  const startX = Math.floor(width / 2);
-  const startY =
-    direction === 'down' ? Math.floor(height * 0.8) : Math.floor(height * 0.2);
-  const endY =
-    direction === 'down' ? Math.floor(height * 0.2) : Math.floor(height * 0.8);
-
-  await performActions(driver, [
-    {
-      type: 'pointer',
-      id: 'finger1',
-      parameters: { pointerType: 'touch' },
-      actions: [
-        { type: 'pointerMove', duration: 0, x: startX, y: startY },
-        { type: 'pointerDown', button: 0 },
-        { type: 'pause', duration: 250 },
-        { type: 'pointerMove', duration: 600, x: startX, y: endY },
-        { type: 'pointerUp', button: 0 },
-      ],
-    },
-  ]);
-}
-
-async function scrollOnce(
-  driver: DriverInstance,
-  direction: 'up' | 'down'
-): Promise<void> {
-  const platform = getPlatformName(driver);
-  if (platform === PLATFORM.ios) {
-    await execute(driver, 'mobile: scroll', { direction });
-    return;
-  }
-  await performW3CScroll(driver, direction);
 }
 
 export async function handleScrollToElement(
@@ -77,6 +55,9 @@ export async function handleScrollToElement(
       ? args.direction
       : 'down';
 
+  const maxScroll = args.maxScrollAttempts;
+  const distance = resolveScrollDistance(args);
+
   try {
     if (await tryFindElement(driver, args.strategy, args.selector)) {
       return textResult(
@@ -84,17 +65,34 @@ export async function handleScrollToElement(
       );
     }
 
-    for (let attempt = 1; attempt <= MAX_SCROLL_ATTEMPTS; attempt++) {
-      await scrollOnce(driver, direction);
+    let scrollsDone = 0;
+    while (scrollsDone < maxScroll) {
+      const xmlBefore = await getPageSource(driver);
+      try {
+        await performVerticalScroll(driver, { direction, distance });
+      } catch (scrollErr: unknown) {
+        return errorResult(
+          `Scroll failed during scroll_to_element: ${toolErrorMessage(scrollErr)}`
+        );
+      }
+      const xmlAfter = await getPageSource(driver);
+      scrollsDone++;
+
       if (await tryFindElement(driver, args.strategy, args.selector)) {
         return textResult(
-          `Successfully scrolled to element ${args.selector} after ${attempt} scroll(s).`
+          `Successfully scrolled to element ${args.selector} after ${scrollsDone} scroll(s).`
+        );
+      }
+
+      if (xmlBefore === xmlAfter) {
+        return errorResult(
+          `Element not found; page source did not change after scroll (likely end of scrollable content). selector=${args.selector}`
         );
       }
     }
 
     return errorResult(
-      `Element ${args.selector} not found after ${MAX_SCROLL_ATTEMPTS} scrolls in direction '${direction}'.`
+      `Element ${args.selector} not found after ${maxScroll} scroll(s) in direction '${direction}'.`
     );
   } catch (err) {
     return errorResult(`Failed to scroll_to_element. ${toolErrorMessage(err)}`);

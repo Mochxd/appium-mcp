@@ -16,6 +16,9 @@ export type GestureAction = (typeof GESTURE_ACTIONS)[number];
 export const SWIPE_SPEEDS = ['slow', 'normal', 'fast'] as const;
 export type SwipeSpeed = (typeof SWIPE_SPEEDS)[number];
 
+export const SCROLL_DISTANCE_PRESETS = ['small', 'medium', 'large'] as const;
+export type ScrollDistancePreset = (typeof SCROLL_DISTANCE_PRESETS)[number];
+
 export const LOCATOR_STRATEGIES = [
   'xpath',
   'id',
@@ -39,7 +42,9 @@ export const gestureSchema = z.object({
         `scroll: browse a list, feed, or page to reveal content. ` +
         `swipe: dismiss a card, switch screens or tabs, navigate a carousel, or pull-to-refresh (use speed=fast). ` +
         `pinch_zoom: zoom in (scale > 1) or out (scale < 1) on maps, images, or any zoomable view. ` +
-        `scroll_to_element: scroll until a specific element is on screen.`
+        `scroll_to_element: scroll until a specific element is on screen (strategy + selector + direction up|down). ` +
+        `Stops when the element is found, page source is unchanged after a scroll (end of scrollable content), or maxScrollAttempts is reached. ` +
+        `Optional scrollDistance (0.05–1) or scrollDistancePreset (small|medium|large).`
     ),
 
   elementUUID: elementUUIDScheme
@@ -138,6 +143,35 @@ export const gestureSchema = z.object({
     .string()
     .optional()
     .describe(`Locator selector value. Required for: scroll_to_element.`),
+
+  maxScrollAttempts: z
+    .number()
+    .int()
+    .min(1)
+    .max(80)
+    .optional()
+    .default(10)
+    .describe(
+      `scroll_to_element only: maximum scroll attempts after the element is not yet visible (default 10).`
+    ),
+
+  scrollDistance: z
+    .number()
+    .min(0.05)
+    .max(1)
+    .optional()
+    .describe(
+      `scroll_to_element only: vertical swipe length as a fraction 0.05–1 (same scale as legacy scroll). ` +
+        `Ignored when scrollDistancePreset is set. Default 0.45 if neither preset nor scrollDistance is set.`
+    ),
+
+  scrollDistancePreset: z
+    .enum(SCROLL_DISTANCE_PRESETS)
+    .optional()
+    .describe(
+      `scroll_to_element only: convenience preset — small ≈ light nudge (0.25), medium ≈ 0.45, large = full default swipe (1). ` +
+        `When set, overrides scrollDistance.`
+    ),
 
   sessionId: z
     .string()

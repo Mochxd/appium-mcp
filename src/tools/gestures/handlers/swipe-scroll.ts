@@ -55,8 +55,7 @@ export type VerticalScrollOptions = {
 
 /**
  * Vertical swipe in the middle of the window, scaled by `distance` (0.05–1).
- * Used by `appium_find_element` when `scrollUntilFound` is true; matches the
- * legacy `appium_scroll` gesture distances.
+ * Used by `appium_gesture` `scroll_to_element`; matches legacy scroll distances.
  */
 export async function performVerticalScroll(
   driver: DriverInstance,
