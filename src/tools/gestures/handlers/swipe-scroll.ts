@@ -26,6 +26,85 @@ interface Rect {
 
 const SCROLL_DURATION_MS = 800;
 const SCROLL_INITIAL_PAUSE_MS = 250;
+/** Pointer move duration for programmatic vertical scroll (matches legacy appium_scroll). */
+const VERTICAL_SCROLL_MOVE_MS = 600;
+
+function verticalScrollYs(
+  height: number,
+  direction: 'up' | 'down',
+  distance: number
+): { startY: number; endY: number } {
+  const mid = height * 0.5;
+  const halfSpan = height * 0.3 * distance;
+  if (direction === 'down') {
+    return {
+      startY: Math.floor(mid + halfSpan),
+      endY: Math.floor(mid - halfSpan),
+    };
+  }
+  return {
+    startY: Math.floor(mid - halfSpan),
+    endY: Math.floor(mid + halfSpan),
+  };
+}
+
+export type VerticalScrollOptions = {
+  direction: 'up' | 'down';
+  distance: number;
+};
+
+/**
+ * Vertical swipe in the middle of the window, scaled by `distance` (0.05–1).
+ * Used by `appium_find_element` when `scrollUntilFound` is true; matches the
+ * legacy `appium_scroll` gesture distances.
+ */
+export async function performVerticalScroll(
+  driver: DriverInstance,
+  options: VerticalScrollOptions
+): Promise<void> {
+  const rect = await getWindowRect(driver);
+  const { width, height } = rect;
+  const startX = Math.floor(width / 2);
+  const { startY, endY } = verticalScrollYs(
+    height,
+    options.direction,
+    options.distance
+  );
+
+  if (getPlatformName(driver) === PLATFORM.android) {
+    await performActions(driver, [
+      {
+        type: 'pointer',
+        id: 'finger1',
+        parameters: { pointerType: 'touch' },
+        actions: [
+          { type: 'pointerMove', duration: 0, x: startX, y: startY },
+          { type: 'pointerDown', button: 0 },
+          { type: 'pause', duration: SCROLL_INITIAL_PAUSE_MS },
+          {
+            type: 'pointerMove',
+            duration: VERTICAL_SCROLL_MOVE_MS,
+            x: startX,
+            y: endY,
+          },
+          { type: 'pointerUp', button: 0 },
+        ],
+      },
+    ]);
+  } else if (getPlatformName(driver) === PLATFORM.ios) {
+    await execute(driver, 'mobile: scroll', {
+      direction: options.direction,
+      startX,
+      startY,
+      endX: startX,
+      endY,
+    });
+  } else {
+    throw new Error(
+      `Unsupported platform: ${getPlatformName(driver)}. Only Android and iOS are supported.`
+    );
+  }
+}
 
 const SWIPE_SPEED_PROFILES = {
   slow: { duration: 600, initialPause: 250 },

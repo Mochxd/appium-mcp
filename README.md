@@ -321,7 +321,7 @@ The default regex pattern allows any URL that starts with `http://` or `https://
 
 | Tool                  | Description                                                                                  |
 | --------------------- | -------------------------------------------------------------------------------------------- |
-| `appium_find_element` | Find a specific element using traditional locator strategies (xpath, id, accessibility id, etc.) **OR** AI-powered natural language descriptions (e.g., "yellow search button at bottom"). Supports both traditional and AI modes. |
+| `appium_find_element` | Find a specific element using traditional locator strategies (xpath, id, accessibility id, etc.) **OR** AI-powered natural language descriptions (e.g., "yellow search button at bottom"). Traditional mode supports optional **`scrollUntilFound`**: scroll between find attempts until the element appears, the page source stops changing after a scroll, or **`maxScrollAttempts`** is reached (not available with `ai_instruction`). |
 | `appium_gesture`      | Perform a touch gesture. `action` = `tap`, `double_tap`, `long_press`, `scroll`, `swipe`, `pinch_zoom`, or `scroll_to_element`. Supports element UUIDs (including AI-found `ai-element:` UUIDs) and raw coordinates. For swipe, use `speed` = `slow` \| `normal` \| `fast` (fast for pull-to-refresh). |
 | `appium_drag_and_drop` | Perform a drag and drop gesture from a source location to a target location (supports element-to-element, element-to-coordinates, coordinates-to-element, and coordinates-to-coordinates) |
 | `appium_perform_actions` | Execute raw W3C Actions API sequences for custom multi-touch gestures (rotate, three-finger swipe, edge swipes, precise timing). Prefer `appium_gesture` for standard gestures. |
@@ -395,6 +395,21 @@ This example demonstrates a complete e-commerce checkout flow that can be automa
   "arguments": {
     "strategy": "xpath",
     "selector": "//android.widget.Button[@text='Search']"
+  }
+}
+```
+
+**Traditional mode — scroll until found (lists / long screens):**
+```json
+{
+  "tool": "appium_find_element",
+  "arguments": {
+    "strategy": "xpath",
+    "selector": "//*[contains(@text,'My header')]",
+    "scrollUntilFound": true,
+    "scrollDirection": "down",
+    "scrollDistance": 0.45,
+    "maxScrollAttempts": 40
   }
 }
 ```
