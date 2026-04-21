@@ -2,6 +2,8 @@ import type { ContentResult } from 'fastmcp';
 import type { DriverInstance } from '../session-store.js';
 import { getDriver } from '../session-store.js';
 
+const W3C_ELEMENT_ID = 'element-6066-11e4-a52e-4f735466cecf';
+
 /**
  * Normalizes unknown errors into a message string for tool responses.
  */
@@ -10,10 +12,31 @@ export function toolErrorMessage(err: unknown): string {
 }
 
 /**
+ * Reads the WebDriver element id from a findElement/activeElement payload.
+ */
+export function readWebElementId(
+  element: Record<string, unknown>
+): string | undefined {
+  const id = element[W3C_ELEMENT_ID] ?? element['ELEMENT'];
+  return typeof id === 'string' ? id : undefined;
+}
+
+/**
  * Standard success ContentResult.
  */
 export function textResult(text: string): ContentResult {
   return { content: [{ type: 'text', text }] };
+}
+
+/**
+ * Canonical first line: machine-parseable `elementId:<value>`, then human-readable detail.
+ */
+export function textResultWithPrimaryElementId(
+  elementId: string,
+  detail: string
+): ContentResult {
+  const d = detail.replace(/^\s+/, '');
+  return textResult(`elementId:${elementId}\n${d}`);
 }
 
 /**

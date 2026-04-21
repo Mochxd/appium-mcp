@@ -10,6 +10,7 @@ import {
 import {
   errorResult,
   textResult,
+  textResultWithPrimaryElementId,
   toolErrorMessage,
 } from '../../tool-response.js';
 import type { GestureArgs } from '../schema.js';
@@ -74,12 +75,16 @@ export async function handleTap(
           return errorResult(parsed.error);
         }
         await performActions(driver, w3cTapAt(parsed.x, parsed.y));
-        return textResult(
+        return textResultWithPrimaryElementId(
+          args.elementUUID,
           `Successfully tapped at AI element coordinates (${parsed.x}, ${parsed.y}).`
         );
       }
       await elementClick(driver, args.elementUUID);
-      return textResult(`Successfully tapped element ${args.elementUUID}.`);
+      return textResultWithPrimaryElementId(
+        args.elementUUID,
+        `Successfully tapped element ${args.elementUUID}.`
+      );
     }
 
     if (args.x === undefined || args.y === undefined) {
@@ -91,7 +96,7 @@ export async function handleTap(
     return textResult(
       `Successfully tapped at coordinates (${args.x}, ${args.y}).`
     );
-  } catch (err) {
+  } catch (err: unknown) {
     return errorResult(`Failed to perform tap. ${toolErrorMessage(err)}`);
   }
 }
@@ -110,7 +115,8 @@ export async function handleDoubleTap(
         await execute(driver, 'mobile: doubleTap', {
           elementId: args.elementUUID,
         });
-        return textResult(
+        return textResultWithPrimaryElementId(
+          args.elementUUID,
           `Successfully double tapped element ${args.elementUUID}.`
         );
       }
@@ -174,7 +180,8 @@ export async function handleLongPress(
             elementId: args.elementUUID,
             duration: duration / 1000,
           });
-          return textResult(
+          return textResultWithPrimaryElementId(
+            args.elementUUID,
             `Successfully long pressed element ${args.elementUUID} for ${duration}ms.`
           );
         } catch {
@@ -206,10 +213,16 @@ export async function handleLongPress(
         ],
       },
     ]);
+    if (args.elementUUID) {
+      return textResultWithPrimaryElementId(
+        args.elementUUID,
+        `Successfully long pressed at (${x}, ${y}) for ${duration}ms.`
+      );
+    }
     return textResult(
       `Successfully long pressed at (${x}, ${y}) for ${duration}ms.`
     );
-  } catch (err) {
+  } catch (err: unknown) {
     return errorResult(
       `Failed to perform long_press. ${toolErrorMessage(err)}`
     );
