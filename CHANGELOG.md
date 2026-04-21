@@ -1,3 +1,9 @@
+## [1.61.0](https://github.com/appium/appium-mcp/compare/v1.60.2...v1.61.0) (2026-04-21)
+
+### Features
+
+* consolidate gesture tools ([#278](https://github.com/appium/appium-mcp/issues/278)) ([17faac6](https://github.com/appium/appium-mcp/commit/17faac696cf4d096250fcc182d4d68af73ed1a92))
+
 ## [1.60.2](https://github.com/appium/appium-mcp/compare/v1.60.1...v1.60.2) (2026-04-21)
 
 ### Miscellaneous Chores
