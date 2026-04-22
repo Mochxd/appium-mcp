@@ -319,8 +319,7 @@ MCP Appium provides a comprehensive set of tools organized into the following ca
 | `create_session` | Create a new mobile automation session for Android, iOS, or `general` capabilities (see 'general' mode above). If a remote Appium server is referenced, `create_session` forwards the final capabilities to that server via the WebDriver `newSession` API - include device selection (e.g., `appium:udid`) in `capabilities` when targeting a remote server. |
 | `delete_session` | Delete the current mobile session and clean up resources                                                    |
 | `appium_mobile_device_control` | Control device behavior: lock/unlock the screen, shake the device, or open the notifications panel (`action`: `lock` \| `unlock` \| `shake` \| `open_notifications`). `shake` is iOS only; `open_notifications` is Android only; `seconds` is optional for timed lock. |
-| `appium_get_settings` | Read current Appium driver session settings (idle timeouts, animation-related flags, selector waits, etc.). Helps diagnose and tune flaky automation. |
-| `appium_update_settings` | Merge key-value updates into driver session settings (driver-specific keys; use `appium_get_settings` to inspect). |
+| `appium_driver_settings` | Read or update Appium driver session settings in one tool. `action=get` returns current settings as JSON; `action=update` merges a `settings` map (driver-specific keys; use `action=get` first to inspect). |
 
 The remote server URL in `create_session` can be set via the `remoteServerUrl` parameter.
 If `REMOTE_SERVER_URL_ALLOW_REGEX` is set, the URL must match the provided regex pattern for security reasons.
