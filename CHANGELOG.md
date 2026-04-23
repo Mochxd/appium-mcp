@@ -1,3 +1,9 @@
+## [1.65.0](https://github.com/appium/appium-mcp/compare/v1.64.0...v1.65.0) (2026-04-23)
+
+### Features
+
+* **tools:** consolidate driver settings into appium_driver_settings ([#284](https://github.com/appium/appium-mcp/issues/284)) ([65e5dcd](https://github.com/appium/appium-mcp/commit/65e5dcd49412c73a85f5b5794ade47b84647560c))
+
 ## [1.64.0](https://github.com/appium/appium-mcp/compare/v1.63.1...v1.64.0) (2026-04-23)
 
 ### Features
