@@ -1,3 +1,9 @@
+## [1.66.0](https://github.com/appium/appium-mcp/compare/v1.65.0...v1.66.0) (2026-04-23)
+
+### Features
+
+* **tools:** structured logs, toolErrorMessage, canonical elementId line ([#282](https://github.com/appium/appium-mcp/issues/282)) ([4f73519](https://github.com/appium/appium-mcp/commit/4f73519315b4dea1850633db80701ef80113407c))
+
 ## [1.65.0](https://github.com/appium/appium-mcp/compare/v1.64.0...v1.65.0) (2026-04-23)
 
 ### Features
