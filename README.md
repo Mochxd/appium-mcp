@@ -192,6 +192,26 @@ Set the `CAPABILITIES_CONFIG` environment variable to point to your configuratio
   - If `CAPABILITIES_CONFIG` is set, it will merge with the `general` section from your capabilities file.
 - This allows custom setups and non-standard platforms to work without changing server logic.
 
+### Integrator notes (sessions, transport, logging)
+
+For **CI**, **device farms**, or **multi-session** setups:
+
+#### Multi-session and `sessionId`
+
+The process keeps one **active** Appium session; tools use it when **`sessionId` is omitted**. If more than one session exists (see **`appium_session_management`** with **`action=list`**), pass **`sessionId` on every tool call** that must target a specific session. Do not assume the active session is stable if other clients or flows can create, select, or delete sessions.
+
+#### Client disconnect
+
+When the MCP **client disconnects**, the server **closes every session** it is tracking (Appium **`deleteSession`** for each). Transports that drop often—**`httpStream`** behind proxies, idle timeouts, or flaky clients—will **wipe automation** in one go. **stdio** is usually safer for a single long-lived operator; if you use **httpStream**, expect reconnects to require **new sessions**.
+
+#### Remote Appium, CI, and device farms
+
+For **grids, cloud labs, or CI**, prefer **`remoteServerUrl`** plus explicit **`capabilities`** on **`appium_session_management`** (**`action=create`**)—for example **`appium:udid`**, app path or id, platform version—rather than depending on local discovery. **`select_device`** is geared toward **local** ADB / simulator picking; use it as a **dev convenience**, not the main path for allocated remote devices.
+
+#### Tool logging and argument size
+
+Tool calls are logged with argument **redaction** implemented via **`JSON.stringify`**. Oversized payloads (huge **`capabilities`** objects, long strings) cost **CPU** and **log volume**. Prefer **`CAPABILITIES_CONFIG`** or smaller per-call objects when you can.
+
 ### Screenshots
 
 Set the `SCREENSHOTS_DIR` environment variable to specify where screenshots are saved. If not set, screenshots are saved to the current working directory. Supports both absolute and relative paths (relative paths are resolved from the current working directory). The directory is created automatically if it doesn't exist.
