@@ -52,11 +52,8 @@ async function handleIsShown(sessionId?: string): Promise<ContentResult> {
   }
   const { driver } = resolved;
 
-  const raw = await execute(driver, 'mobile: isKeyboardShown', {});
-  if (typeof raw !== 'boolean') {
-    throw new Error(`Unexpected isKeyboardShown result type: ${typeof raw}`);
-  }
-  return textResult(JSON.stringify({ keyboardShown: raw }, null, 2));
+  const keyboardShown = await execute(driver, 'mobile: isKeyboardShown', {});
+  return textResult(JSON.stringify({ keyboardShown }, null, 2));
 }
 
 export default function keyboard(server: FastMCP): void {
