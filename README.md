@@ -210,7 +210,7 @@ For **grids, cloud labs, or CI**, prefer **`remoteServerUrl`** plus explicit **`
 
 #### Tool logging and argument size
 
-Tool calls are logged with argument **redaction** implemented via **`JSON.stringify`**. Oversized payloads (huge **`capabilities`** objects, long strings) cost **CPU** and **log volume**. Prefer **`CAPABILITIES_CONFIG`** or smaller per-call objects when you can.
+Tool calls are logged with argument **redaction** implemented via **`JSON.stringify`**. Oversized payloads (especially long **base64 strings**, e.g., screenshot/image payloads, and also very large **`capabilities`** objects) cost **CPU** and **log volume**. Prefer **`CAPABILITIES_CONFIG`** and avoid passing large inline blobs in tool arguments when possible.
 
 ### Screenshots
 
