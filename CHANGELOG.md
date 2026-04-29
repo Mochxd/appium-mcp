@@ -1,3 +1,9 @@
+## [1.69.1](https://github.com/appium/appium-mcp/compare/v1.69.0...v1.69.1) (2026-04-29)
+
+### Bug Fixes
+
+* apply lint:fix ([#300](https://github.com/appium/appium-mcp/issues/300)) ([f65ee47](https://github.com/appium/appium-mcp/commit/f65ee470ff51e945c5f07c50e9953a4c7f6aa2d4))
+
 ## [1.69.0](https://github.com/appium/appium-mcp/compare/v1.68.0...v1.69.0) (2026-04-29)
 
 ### Features
