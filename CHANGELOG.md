@@ -1,3 +1,9 @@
+## [1.69.0](https://github.com/appium/appium-mcp/compare/v1.68.0...v1.69.0) (2026-04-29)
+
+### Features
+
+* **ios:** add `appium_prepare_ios_real_device` tool ([#297](https://github.com/appium/appium-mcp/issues/297)) ([998c6a1](https://github.com/appium/appium-mcp/commit/998c6a16c988779f2b76ea92433ef59469ac9051))
+
 ## [1.68.0](https://github.com/appium/appium-mcp/compare/v1.67.1...v1.68.0) (2026-04-29)
 
 ### Features
