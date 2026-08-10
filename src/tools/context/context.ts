@@ -37,8 +37,8 @@ export default function context(server: FastMCP): void {
 
       try {
         const [currentContext, availableContexts] = await Promise.all([
-          getCurrentContext(driver).catch(() => null),
-          getContexts(driver).catch(() => [] as string[]),
+          getCurrentContext(driver),
+          getContexts(driver),
         ]);
 
         if (currentContext) {
