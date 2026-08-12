@@ -43,18 +43,7 @@ export async function listAppsFromDevice(
       if (!udid) {
         throw new Error('Could not determine simulator UDID from session capabilities');
       }
-      const {stdout} = await exec('xcrun', [
-        'simctl',
-        'listapps',
-        udid,
-        '|',
-        'plutil',
-        '-convert',
-        'json',
-        '-o',
-        '-',
-        '-',
-      ]);
+      const {stdout} = await exec('xcrun', ['simctl', 'listapps', udid, '--json']);
       const result = JSON.parse(stdout);
       return normalizeListAppsResult(result || {});
     }
