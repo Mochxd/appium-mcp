@@ -1,7 +1,7 @@
 import type {XCUITestDriver} from 'appium-xcuitest-driver';
 
-import {getSessionId, getDriver, getPlatformName, PLATFORM, isXCUITestDriverSession} from '../../session-store.js';
-import {noActiveDriverSessionMessage} from '../tool-response.js';
+import {getSessionId, getPlatformName, PLATFORM, isXCUITestDriverSession} from '../../session-store.js';
+import {noActiveDriverSessionMessage, resolveDriver} from '../tool-response.js';
 import {listAppsFromDevice} from './list-apps.js';
 
 interface CacheEntry {
@@ -89,10 +89,11 @@ async function getInstalledApps(sessionId?: string): Promise<{packageName: strin
     return cached.apps;
   }
 
-  const driver = getDriver(sessionId);
-  if (!driver) {
+  const resolved = await resolveDriver(sessionId);
+  if (!resolved.ok) {
     throw new Error(noActiveDriverSessionMessage(sessionId));
   }
+  const {driver} = resolved;
 
   const platform = getPlatformName(driver);
 
