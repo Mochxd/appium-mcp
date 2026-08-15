@@ -107,6 +107,10 @@ async function getInstalledApps(sessionId?: string): Promise<{packageName: strin
       listAppsFromDevice(driver, 'User'),
       listAppsFromDevice(driver, 'System'),
     ]);
+    const failures = results.filter((result) => result.status === 'rejected');
+    if (failures.length === results.length) {
+      throw failures[0].reason;
+    }
     const seen = new Set<string>();
     apps = [];
     for (const result of results) {
