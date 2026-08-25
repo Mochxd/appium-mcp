@@ -1,3 +1,9 @@
+## [1.92.6](https://github.com/appium/appium-mcp/compare/v1.92.5...v1.92.6) (2026-08-25)
+
+### Bug Fixes
+
+* **alert:** read W3C element id for Android custom button clicks ([#491](https://github.com/appium/appium-mcp/issues/491)) ([3500517](https://github.com/appium/appium-mcp/commit/3500517630c4aa951fab0e9379d388feef3dacca))
+
 ## [1.92.5](https://github.com/appium/appium-mcp/compare/v1.92.4...v1.92.5) (2026-08-21)
 
 ### Bug Fixes
