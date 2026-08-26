@@ -2,6 +2,10 @@ import {constants, existsSync, promises as fsPromises} from 'node:fs';
 
 const noop = () => {};
 
+const npmlog = {
+  stream: process.stderr as NodeJS.WritableStream | null,
+};
+
 export const logger = {
   getLogger: (_name: string) => ({
     debug: noop,
@@ -9,6 +13,8 @@ export const logger = {
     warn: noop,
     error: noop,
     trace: noop,
+    level: 'info' as string,
+    unwrap: () => npmlog,
   }),
 };
 

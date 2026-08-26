@@ -1,6 +1,29 @@
 import {logger} from '@appium/support';
 
+import {isStdioTransportLoggingConfigured, markStdioTransportLoggingConfigured} from './stdio-logging-state.js';
+
 const log = logger.getLogger('appium-mcp');
+
+/** npmlog must not write to stdout (stdio JSON-RPC). Skip if the host already set a custom stream. */
+export function ensureLoggerWritesToStderr(): void {
+  const root = log.unwrap();
+  if (root.stream === process.stdout) {
+    root.stream = process.stderr;
+  }
+}
+
+/** stdio transport: drop info/debug so they cannot sit on stdout. */
+export function configureStdioTransportLogging(): void {
+  if (isStdioTransportLoggingConfigured()) {
+    return;
+  }
+  markStdioTransportLoggingConfigured();
+  ensureLoggerWritesToStderr();
+  log.level = 'warn';
+  if (!process.env.WDIO_LOG_LEVEL) {
+    process.env.WDIO_LOG_LEVEL = 'warn';
+  }
+}
 
 export default log;
 export {log};
