@@ -1,4 +1,5 @@
 import {afterEach, describe, expect, test} from '@jest/globals';
+import wdioLogger from '@wdio/logger';
 
 import {configureStdioTransportLogging, ensureLoggerWritesToStderr, log} from '../logger.js';
 import {isStdioTransportLoggingConfigured, markStdioTransportLoggingConfigured} from '../stdio-logging-state.js';
@@ -48,6 +49,11 @@ describe('stdio transport logging', () => {
   test('configureStdioTransportLogging quiets info logs and WDIO when unset', () => {
     delete process.env.WDIO_LOG_LEVEL;
     log.unwrap().stream = process.stdout;
+    const utilsLogger = wdioLogger('@wdio/utils');
+    const webdriverLogger = wdioLogger('webdriver');
+    utilsLogger.setLevel('info');
+    webdriverLogger.setLevel('info');
+    const infoLevel = utilsLogger.getLevel();
 
     configureStdioTransportLogging();
 
@@ -55,6 +61,8 @@ describe('stdio transport logging', () => {
     expect(log.unwrap().stream).toBe(process.stderr);
     expect(log.level).toBe('warn');
     expect(process.env.WDIO_LOG_LEVEL).toBe('warn');
+    expect(utilsLogger.getLevel()).toBeGreaterThan(infoLevel);
+    expect(webdriverLogger.getLevel()).toBeGreaterThan(infoLevel);
   });
 
   test('withQuietWebDriverLogging sets warn after stdio logging is configured', () => {

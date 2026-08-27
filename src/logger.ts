@@ -1,6 +1,7 @@
 import {logger} from '@appium/support';
 
 import {isStdioTransportLoggingConfigured, markStdioTransportLoggingConfigured} from './stdio-logging-state.js';
+import {quietExistingWdioLoggers} from './utils/wdio-logging.js';
 
 const log = logger.getLogger('appium-mcp');
 
@@ -20,9 +21,7 @@ export function configureStdioTransportLogging(): void {
   markStdioTransportLoggingConfigured();
   ensureLoggerWritesToStderr();
   log.level = 'warn';
-  if (!process.env.WDIO_LOG_LEVEL) {
-    process.env.WDIO_LOG_LEVEL = 'warn';
-  }
+  quietExistingWdioLoggers();
 }
 
 export default log;
