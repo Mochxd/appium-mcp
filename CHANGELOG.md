@@ -1,3 +1,9 @@
+## [1.92.7](https://github.com/appium/appium-mcp/compare/v1.92.6...v1.92.7) (2026-08-27)
+
+### Bug Fixes
+
+* missing teen process ([#495](https://github.com/appium/appium-mcp/issues/495)) ([54da403](https://github.com/appium/appium-mcp/commit/54da40304902df0dc9c6cc93ab91a702b53cf9d3))
+
 ## [1.92.6](https://github.com/appium/appium-mcp/compare/v1.92.5...v1.92.6) (2026-08-25)
 
 ### Bug Fixes
