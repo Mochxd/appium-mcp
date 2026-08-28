@@ -1,3 +1,9 @@
+## [1.92.9](https://github.com/appium/appium-mcp/compare/v1.92.8...v1.92.9) (2026-08-28)
+
+### Bug Fixes
+
+* followup for [#493](https://github.com/appium/appium-mcp/issues/493) ([#496](https://github.com/appium/appium-mcp/issues/496)) ([75aa0e1](https://github.com/appium/appium-mcp/commit/75aa0e1f987ef99503e3587978bd1be8aca0e7f6))
+
 ## [1.92.8](https://github.com/appium/appium-mcp/compare/v1.92.7...v1.92.8) (2026-08-28)
 
 ### Bug Fixes
