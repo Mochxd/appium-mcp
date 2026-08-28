@@ -538,6 +538,8 @@ const server = await createAppiumMcpServer({
 await server.start({ transportType: 'stdio' });
 ```
 
+`start({ transportType: 'stdio' })` keeps Appium and WebDriver logs off stdout so JSON-RPC stays intact. httpStream is unchanged.
+
 Plugin lifecycle:
 
 - `register(registry, core)`: called during server construction. Register custom tools, prompts, resources, and resource templates here.
