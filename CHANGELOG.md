@@ -1,3 +1,9 @@
+## [1.92.8](https://github.com/appium/appium-mcp/compare/v1.92.7...v1.92.8) (2026-08-28)
+
+### Bug Fixes
+
+* **stdio:** keep Appium and WebDriver logs off JSON-RPC stdout ([#493](https://github.com/appium/appium-mcp/issues/493)) ([c9fb4ee](https://github.com/appium/appium-mcp/commit/c9fb4eeff50d4dfd820f6593510ccc894a0c9116))
+
 ## [1.92.7](https://github.com/appium/appium-mcp/compare/v1.92.6...v1.92.7) (2026-08-27)
 
 ### Bug Fixes
