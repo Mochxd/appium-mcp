@@ -1,3 +1,9 @@
+## [1.92.11](https://github.com/appium/appium-mcp/compare/v1.92.10...v1.92.11) (2026-08-29)
+
+### Bug Fixes
+
+* **command:** re-throw swallowed remote errors for execute and session commands ([#497](https://github.com/appium/appium-mcp/issues/497)) ([05c5b4a](https://github.com/appium/appium-mcp/commit/05c5b4aad1227dcad385aec7b7230e325af2256a))
+
 ## [1.92.10](https://github.com/appium/appium-mcp/compare/v1.92.9...v1.92.10) (2026-08-29)
 
 ### Miscellaneous Chores
