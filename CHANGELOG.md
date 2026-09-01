@@ -1,3 +1,9 @@
+## [1.92.12](https://github.com/appium/appium-mcp/compare/v1.92.11...v1.92.12) (2026-09-01)
+
+### Bug Fixes
+
+* **device-control:** shake remote iOS sessions ([#509](https://github.com/appium/appium-mcp/issues/509)) ([9c237f1](https://github.com/appium/appium-mcp/commit/9c237f16f88c5ae4f2f999f56f424905ed19b3dc))
+
 ## [1.92.11](https://github.com/appium/appium-mcp/compare/v1.92.10...v1.92.11) (2026-08-29)
 
 ### Bug Fixes
