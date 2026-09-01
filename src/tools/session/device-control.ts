@@ -90,10 +90,19 @@ async function handleUnlock(driver: DriverInstance): Promise<ContentResult> {
 }
 
 async function handleShake(driver: DriverInstance): Promise<ContentResult> {
-  if (!isXCUITestDriverSession(driver)) {
-    return platformMismatch('shake', 'iOS', getPlatformName(driver));
+  const platform = getPlatformName(driver);
+  if (platform !== PLATFORM.ios) {
+    return platformMismatch('shake', 'iOS', platform);
   }
-  await (driver as any).mobileShake();
+
+  if (isXCUITestDriverSession(driver)) {
+    await driver.mobileShake();
+  } else if (isRemoteDriverSession(driver)) {
+    await execute(driver, 'mobile: shake', {});
+  } else {
+    return errorResult('Unsupported iOS driver for shake');
+  }
+
   return textResult('Shake action performed.');
 }
 
